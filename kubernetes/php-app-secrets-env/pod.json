@@ -1,0 +1,73 @@
+{
+  "apiVersion": "v1",
+  "kind": "Pod",
+  "metadata": {
+    "name": "php-app-secret",
+    "labels": {
+      "app": "php-app-secret"
+    }
+  },
+  "spec": {
+    "containers": [
+      {
+        "name": "php-app-secret",
+        "image": "infog/php-app-secret-env",
+        "env": [
+          {"name": "PORT", "value": "80"},
+          {
+            "name": "PHP_APP_USERNAME",
+            "valueFrom": {
+              "secretKeyRef": {
+                "name": "php-app-secrets",
+                "key": "PHP_APP_USERNAME"
+              }
+            }
+          },
+          {
+            "name": "PHP_APP_PASSWORD",
+            "valueFrom": {
+              "secretKeyRef": {
+                "name": "php-app-secrets",
+                "key": "PHP_APP_PASSWORD"
+              }
+            }
+          },
+          {
+            "name": "PHP_APP_HOST",
+            "valueFrom": {
+              "secretKeyRef": {
+                "name": "php-app-secrets",
+                "key": "PHP_APP_HOST"
+              }
+            }
+          },
+          {
+            "name": "PHP_APP_KEY",
+            "valueFrom": {
+              "secretKeyRef": {
+                "name": "php-app-secrets",
+                "key": "PHP_APP_KEY"
+              }
+            }
+          }
+        ],
+        "resources": {
+          "requests": {
+            "cpu": "100m",
+            "memory": "128M"
+          },
+          "limits": {
+            "cpu": "250m",
+            "memory": "256M"
+          }
+        },
+        "ports": [
+          {
+            "containerPort": 80,
+            "name": "phpappsecport"
+          }
+        ]
+      }
+    ]
+  }
+}

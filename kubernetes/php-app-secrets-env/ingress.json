@@ -1,0 +1,29 @@
+{
+  "apiVersion": "extensions/v1beta1",
+  "kind": "Ingress",
+  "metadata": {
+    "name": "php-app-secret-ingress"
+  },
+  "spec": {
+    "backend": {
+      "serviceName": "default-http-backend",
+      "servicePort": 80
+    },
+    "rules": [
+      {
+        "host": "php-app-secret.local",
+        "http": {
+          "paths": [
+            {
+              "path": "/",
+              "backend": {
+                "serviceName": "php-app-secret-service",
+                "servicePort": 8085
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
