@@ -1,0 +1,39 @@
+{
+  "apiVersion": "apps/v1",
+  "kind": "Deployment",
+  "metadata": {
+    "name": "php-app-deploy",
+    "labels": {
+      "app": "php-app-hostname"
+    }
+  },
+  "spec": {
+    "replicas": 3,
+    "selector": {
+      "matchLabels": {
+        "app": "php-app-hostname"
+      }
+    },
+    "template": {
+      "metadata": {
+        "labels": {
+          "app": "php-app-hostname"
+        }
+      },
+      "spec": {
+        "containers": [{
+          "name": "php-app-hostname",
+          "image": "infog/php-app-hostname",
+          "env": [{
+            "name": "PHP_DB_USER",
+            "value": "root"
+          }],
+          "ports": [{
+            "containerPort": 80,
+            "name": "phpapphnport"
+          }]
+        }]
+      }
+    }
+  }
+}

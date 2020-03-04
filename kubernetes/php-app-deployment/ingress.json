@@ -1,0 +1,29 @@
+{
+  "apiVersion": "extensions/v1beta1",
+  "kind": "Ingress",
+  "metadata": {
+    "name": "php-app-hostname-ingress"
+  },
+  "spec": {
+    "backend": {
+      "serviceName": "default-http-backend",
+      "servicePort": 80
+    },
+    "rules": [
+      {
+        "host": "php-app-hostname.local",
+        "http": {
+          "paths": [
+            {
+              "path": "/",
+              "backend": {
+                "serviceName": "php-app-hostname-service",
+                "servicePort": 8085
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
