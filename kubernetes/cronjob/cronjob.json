@@ -1,0 +1,26 @@
+{
+  "apiVersion": "batch/v1beta1",
+  "kind": "CronJob",
+  "metadata": {
+    "name": "mycron"
+  },
+  "spec": {
+    "schedule": "*/1 * * * *",
+    "jobTemplate": {
+      "spec": {
+        "template": {
+          "spec": {
+            "containers": [
+              {
+                "name": "mybash",
+                "image": "infog/mybash:1.0.0",
+                "args": ["bash",  "/app/cron.sh"]
+              }
+            ],
+            "restartPolicy": "OnFailure"
+          }
+        }
+      }
+    }
+  }
+}
